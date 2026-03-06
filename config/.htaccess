@@ -1,0 +1,18 @@
+# ============================================================
+# FILE: config/.htaccess
+# PURPOSE: Block ALL web access to the configuration directory
+# SERVER: Apache 2.4 / cPanel / Linux
+# ============================================================
+
+Options -Indexes -ExecCGI
+
+# Apache 2.4 syntax
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+
+# Apache 2.2 fallback
+<IfModule !mod_authz_core.c>
+    Order deny,allow
+    Deny from all
+</IfModule>

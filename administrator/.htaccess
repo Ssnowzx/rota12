@@ -1,0 +1,44 @@
+# ============================================================
+# FILE: administrator/.htaccess
+# PURPOSE: Admin panel rewrite rules, security headers, access control
+# SERVER: Apache 2.4 / cPanel / Linux
+# ============================================================
+
+# --- Directory Listing ---
+Options -Indexes
+
+# --- Rewrite Engine ---
+RewriteEngine On
+RewriteBase /versao2/administrator
+
+# --- Block access to hidden files (.env, .git, etc.) ---
+RewriteRule (^|/)\.(?!well-known) - [F,L]
+
+# --- Do NOT rewrite existing files or directories ---
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# --- Do NOT rewrite /administrator/assets/ directory ---
+RewriteRule ^assets/ - [L]
+
+# --- Route everything else to administrator/index.php ---
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# --- Security Headers ---
+<IfModule mod_headers.c>
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "same-origin"
+</IfModule>
+
+# --- Block .env, .git, and other sensitive hidden files ---
+<FilesMatch "(^\.env|^\.git|\.htpasswd|\.htaccess)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</FilesMatch>

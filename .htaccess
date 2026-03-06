@@ -1,0 +1,35 @@
+# ============================================================
+# FILE: public/.htaccess
+# PURPOSE: Frontend rewrite rules, security headers, access control
+# SERVER: Apache 2.4 / cPanel / Linux
+# ============================================================
+
+# --- Directory Listing ---
+Options -Indexes
+   
+   RewriteEngine On
+   RewriteRule (^|/)\.(?!well-known) - [F,L]
+   
+   RewriteCond %{REQUEST_FILENAME} -f [OR]
+   RewriteCond %{REQUEST_FILENAME} -d
+   RewriteRule ^ - [L]
+   
+   RewriteRule ^uploads/ - [L]
+   RewriteRule ^assets/ - [L]
+   
+   # --- Do NOT rewrite /administrator/ (has its own index.php) ---
+   RewriteRule ^administrator(/.*)?$ - [L]
+   
+   RewriteRule ^(.*)$ index.php [QSA,L]
+   
+   <IfModule mod_php.c>
+       php_value upload_max_filesize 3M
+       php_value post_max_size 5M
+       php_value max_input_vars 5000
+   </IfModule>
+   
+   <IfModule mod_headers.c>
+       Header always set X-Frame-Options "SAMEORIGIN"
+       Header always set X-Content-Type-Options "nosniff"
+       Header always set Referrer-Policy "same-origin"
+   </IfModule>

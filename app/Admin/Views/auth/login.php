@@ -1,15 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Login — Admin Rota 12</title>
-    <link rel="icon" href="/public/favicon.ico" type="image/x-icon" sizes="16x16"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-    <link rel="stylesheet" href="/administrator/assets/css/admin.css"/>
-</head>
-<body>
-
 <div class="adm-login-page">
     <div class="adm-login-card">
         <div class="adm-login-logo">
@@ -57,6 +45,3 @@
         </form>
     </div>
 </div>
-
-</body>
-</html>

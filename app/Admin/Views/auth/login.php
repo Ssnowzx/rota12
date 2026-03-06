@@ -6,13 +6,14 @@
         </div>
 
         <?php
-        $flash = $_SESSION['flash'] ?? null;
-        if ($flash): unset($_SESSION['flash']); ?>
-        <div class="adm-alert adm-alert-<?= e($flash['type'] ?? 'error') ?>">
+        $flash = $_SESSION['flash'] ?? [];
+        unset($_SESSION['flash']);
+        foreach ($flash as $f): ?>
+        <div class="adm-alert adm-alert-<?= e($f['type'] ?? 'error') ?>">
             <i class="fas fa-circle-xmark"></i>
-            <?= e($flash['message']) ?>
+            <?= e($f['message'] ?? '') ?>
         </div>
-        <?php endif; ?>
+        <?php endforeach; ?>
 
         <?php if (!empty($error)): ?>
         <div class="adm-alert adm-alert-error">

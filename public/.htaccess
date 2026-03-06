@@ -9,7 +9,7 @@ Options -Indexes
 
 # --- Rewrite Engine ---
 RewriteEngine On
-RewriteBase /
+RewriteBase /versao2/public/
 
 # --- Block access to hidden files (.env, .git, etc.) ---
 RewriteRule (^|/)\.(?!well-known) - [F,L]

@@ -8,6 +8,7 @@
 Options -Indexes
    
    RewriteEngine On
+   RewriteBase /versao2/
    RewriteRule (^|/)\.(?!well-known) - [F,L]
    
    RewriteCond %{REQUEST_FILENAME} -f [OR]
